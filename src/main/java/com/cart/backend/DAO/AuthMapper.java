@@ -14,8 +14,8 @@ public interface AuthMapper {
             "values (#{username}, #{password}, #{email}, #{role})")
     public void insertAuth(Auth auth);
 
-    @Select("select id from auth " +
+    @Select("select * from auth " +
             "where username = #{username} and password = #{password} and role = #{role}")
-    public Integer selectAuth(Auth auth);
+    public Auth selectAuth(Auth auth);
 
 }

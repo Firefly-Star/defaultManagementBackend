@@ -78,10 +78,6 @@ public class MyFilter implements Filter {
 
             chain.doFilter(request, response);
         }
-
-        System.out.println("doFilter");
-        chain.doFilter(request, response);
-
     }
 
 }

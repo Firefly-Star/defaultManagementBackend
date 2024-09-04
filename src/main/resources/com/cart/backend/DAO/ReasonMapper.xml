@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cart.backend.DAO.ReasonMapper">
+
+    <select id="SelectReason" resultType="com.cart.backend.Entity.Reason">
+        select * from reason
+        <where>
+            <if test="cause != null">
+                cause like concat('%', #{cause}, '%')
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

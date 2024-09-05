@@ -21,14 +21,6 @@ public class ReasonController {
     @RequestMapping("/api/admin/reasons")
     public Result adminReasonList(@RequestBody Reason reason) {
 
-        if (!StringUtils.hasLength(reason.getCause()))
-        {
-            reason.setCause(null);
-        }
-        if (!StringUtils.hasLength(reason.getType()))
-        {
-            reason.setType(null);
-        }
         List<Reason> re = reasonMapper.SelectReason(reason);
         return Result.Success(re);
     }
@@ -36,14 +28,6 @@ public class ReasonController {
     @RequestMapping("/api/user/reasons")
     public Result userReasonList(@RequestBody Reason reason) {
 
-        if (!StringUtils.hasLength(reason.getCause()))
-        {
-            reason.setCause(null);
-        }
-        if (!StringUtils.hasLength(reason.getType()))
-        {
-            reason.setType(null);
-        }
         List<Reason> re = reasonMapper.SelectReason(reason);
         return Result.Success(re);
     }

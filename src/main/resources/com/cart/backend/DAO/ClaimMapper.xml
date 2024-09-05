@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cart.backend.DAO.ClaimMapper">
+
+    <select id="SelectClaim" resultType="com.cart.backend.Entity.Claim">
+        select * from claim
+        <where>
+            <if test="clientName != null">
+                clientId = (
+                select id from client
+                where name like concat('%', #{clientName}, '%')
+                )
+            </if>
+            <if test="reasonName != null">
+                and reasonId = (
+                select id from reason
+                where cause like concat('%', #{reasonName}, '%')
+                )
+            </if>
+            <if test="reviewStatus != null">
+                and reviewStatus = #{reviewStatus}
+            </if>
+            <if test="severity != null">
+                and severity = #{severity}
+            </if>
+            <if test="claimTime != null">
+                and Date(claimTime) = #{claimTime}
+            </if>
+            <if test="reviewTime != null">
+                and Date(reviewTime) = #{reviewTime}
+            </if>
+            <if test="externSeverity != null">
+                and externSeverity = #{externSeverity}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="claimerId != null">
+                and claimerId = #{claimerId}
+            </if>
+            <if test="reviewerId != null">
+                and reviewerId = #{reviewerId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

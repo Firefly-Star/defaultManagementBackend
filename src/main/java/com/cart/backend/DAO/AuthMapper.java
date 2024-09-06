@@ -10,12 +10,16 @@ import org.apache.ibatis.annotations.Select;
 public interface AuthMapper {
 
     @Options(keyProperty = "id", useGeneratedKeys = true)
-    @Insert("insert into auth (username, password, email, role) " +
-            "values (#{username}, #{password}, #{email}, #{role})")
+    @Insert("insert into auth (username, password, email, role, name) " +
+            "values (#{username}, #{password}, #{email}, #{role}, #{name})")
     public void insertAuth(Auth auth);
 
     @Select("select * from auth " +
             "where username = #{username} and password = #{password} and role = #{role}")
     public Auth selectAuth(Auth auth);
+
+    @Select("select * from auth " +
+            "where id = #{id}")
+    public Auth UserInfo(Integer id);
 
 }

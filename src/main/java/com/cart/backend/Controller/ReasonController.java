@@ -5,14 +5,12 @@ import com.cart.backend.Entity.Reason;
 import com.cart.backend.Entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8081/user"})
 public class ReasonController {
 
     @Autowired
@@ -21,7 +19,9 @@ public class ReasonController {
     @RequestMapping("/api/admin/reasons")
     public Result adminReasonList(@RequestBody Reason reason) {
 
+        System.out.println(reason);
         List<Reason> re = reasonMapper.SelectReason(reason);
+
         return Result.Success(re);
     }
 
@@ -34,6 +34,9 @@ public class ReasonController {
 
     @RequestMapping("/api/admin/addReason")
     public Result AddReason(@RequestBody Reason reason) {
+
+        System.out.println("Add reason");
+        System.out.println(reason);
         reasonMapper.InsertReason(reason);
 
         if (reason.getId() != null)
@@ -48,6 +51,10 @@ public class ReasonController {
 
     @RequestMapping("/api/admin/editReason")
     public Result editReason(@RequestBody Reason reason) {
+
+        System.out.println("Edit reason");
+        System.out.println(reason);
+
         reasonMapper.UpdateReason(reason);
         return Result.Success(null);
     }

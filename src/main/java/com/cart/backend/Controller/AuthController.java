@@ -2,15 +2,17 @@ package com.cart.backend.Controller;
 
 import com.cart.backend.DAO.AuthMapper;
 import com.cart.backend.Entity.Auth;
+import com.cart.backend.Entity.AuthInfo;
 import com.cart.backend.Entity.Result;
 import com.cart.backend.Utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.HashMap;
+import java.util.Map;
 
+@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8081/user"})
 @RestController
 public class AuthController {
 
@@ -85,5 +87,36 @@ public class AuthController {
         }
     }
 
+    @RequestMapping("/api/user/info")
+    public Result UserInfo(@RequestHeader("userToken") String userToken)
+    {
+        Map<String, Object> claims = JwtUtils.parseJwt(userToken);
+        Integer id = (Integer)claims.get("id");
+
+        Auth auth = authMapper.UserInfo(id);
+
+        AuthInfo authInfo = new AuthInfo();
+        authInfo.setId(auth.getId());
+        authInfo.setName(auth.getName());
+        authInfo.setEmail(auth.getEmail());
+
+        return Result.Success(authInfo);
+    }
+
+    @RequestMapping("/api/admin/info")
+    public Result AdminInfo(@RequestHeader("adminToken") String adminToken)
+    {
+        Map<String, Object> claims = JwtUtils.parseJwt(adminToken);
+        Integer id = (Integer)claims.get("id");
+
+        Auth auth = authMapper.UserInfo(id);
+
+        AuthInfo authInfo = new AuthInfo();
+        authInfo.setId(auth.getId());
+        authInfo.setName(auth.getName());
+        authInfo.setEmail(auth.getEmail());
+
+        return Result.Success(authInfo);
+    }
 
 }

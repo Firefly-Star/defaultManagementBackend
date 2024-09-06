@@ -20,6 +20,9 @@
             <if test="area != null">
                 and area = #{area}
             </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
         </where>
     </select>
 

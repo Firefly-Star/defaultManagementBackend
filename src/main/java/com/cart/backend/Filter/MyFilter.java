@@ -22,6 +22,19 @@ public class MyFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
+        // 设置 CORS 相关响应头，允许跨域
+        res.setHeader("Access-Control-Allow-Origin", "*"); // 设置允许的源
+        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE"); // 设置允许的方法
+        res.setHeader("Access-Control-Allow-Headers", "userToken, adminToken, Content-Type"); // 设置允许的请求头
+        res.setHeader("Access-Control-Allow-Credentials", "true"); // 允许携带凭证（如Cookie）
+
+        // 如果是 OPTIONS 请求，直接返回成功
+        if (req.getMethod().equalsIgnoreCase("OPTIONS")) {
+            res.setStatus(HttpServletResponse.SC_OK);
+            chain.doFilter(request, response);
+            return;
+        }
+
         String url = req.getRequestURI();
 
         String jwtUser = req.getHeader("userToken");

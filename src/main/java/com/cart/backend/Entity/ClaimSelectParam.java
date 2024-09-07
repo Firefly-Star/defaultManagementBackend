@@ -16,6 +16,7 @@ public class ClaimSelectParam {
     String clientName;
     String reviewerName;
     String reviewStatus;
+    String reasonName;
     String severity;
     Date claimTime;
     Date reviewTime;

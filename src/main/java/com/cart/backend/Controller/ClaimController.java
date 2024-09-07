@@ -69,14 +69,20 @@ public class ClaimController {
         System.out.println(param);
 
         List<ClaimSelectParam> res = claimMapper.SelectClaim(param);
+
+        System.out.println(res);
+
         return Result.Success(res);
     }
 
     @RequestMapping("/api/admin/claims")
-    public Result UserSelectClaim(@RequestBody ClaimSelectParam param)
+    public Result AdminSelectClaim(@RequestBody ClaimSelectParam param)
     {
 
         List<ClaimSelectParam> claims = claimMapper.SelectClaim(param);
+
+        System.out.println(claims);
+
         return Result.Success(claims);
     }
 

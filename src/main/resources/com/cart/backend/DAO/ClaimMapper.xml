@@ -7,22 +7,23 @@
 
     <select id="SelectClaim" resultType="com.cart.backend.Entity.ClaimSelectParam">
         select
-            claim.id, client.name,reviewer.name, claimer.name, claim.reviewStatus,
-            claim.severity, claim.claimTime, claim.reviewTime,
-            claim.externSeverity, claim.type, claim.claimerId,claim.reviewerId
+            claim.id as id, client.name as clientName,reviewer.name as reviewerName, claimer.name as claimerName, claim.reviewStatus as reviewStatus,
+            claim.severity as severity, claim.claimTime as claimTime, claim.reviewTime as reviewTime,
+            claim.externSeverity as externSeverity, claim.type as type, claim.claimerId as claimerId,claim.reviewerId as reviewerId, reason.cause as reasonName
         from
         claim inner join client on claim.clientId = client.id
-        inner join auth reviewer on claim.reviewerId = reviewer.id
+        left join auth reviewer on claim.reviewerId = reviewer.id
         inner join auth claimer on claim.claimerId = claimer.id
+        inner join reason on claim.reasonId = reason.id
         <where>
             <if test="clientName != null">
-                claim.clientId = (
+                claim.clientId IN (
                 select id from client
                 where name like concat('%', #{clientName}, '%')
                 )
             </if>
             <if test="reviewerName != null">
-                and claim.reviewerId = (
+                and claim.reviewerId IN (
                 select id from auth
                 where name like concat('%', #{reviewerName}, '%')
                 )
@@ -52,6 +53,7 @@
                 and claim.reviewerId = #{reviewerId}
             </if>
         </where>
+
     </select>
 
 

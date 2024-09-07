@@ -4,24 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AreaAnalysis {
 
-    String Area;
-    Integer Year;
-    BigDecimal DefaultCount;
-    BigDecimal ResurrectCount;
-    Long TotalClaims;
-    BigDecimal DefaultPercentage;
-    BigDecimal ResurrectPercentage;
-    BigDecimal PreviousDefaultCount;
-    BigDecimal PreviousResurrectCount;
-    BigDecimal DefaultGrowthRate;
-    BigDecimal ResurrectGrowthRate;
+    private int year;
+    private String area;
+    private int totalClaim;
+    private int totalDefaultClaim;
+    private int totalRebirthClaim;
 
 }

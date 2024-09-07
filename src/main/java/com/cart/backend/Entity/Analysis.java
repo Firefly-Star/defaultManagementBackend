@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IndustryAnalysis {
+public class Analysis {
 
     private int year;
-    private String industry;
-    private int totalClaim;
-    private int totalDefaultClaim;
-    private int totalRebirthClaim;
+    private int totalClaims;
+    private int totalDefaultClaims;
+    private int totalRebirthClaims;
 
 }

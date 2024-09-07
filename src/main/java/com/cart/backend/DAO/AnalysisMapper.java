@@ -1,5 +1,6 @@
 package com.cart.backend.DAO;
 
+import com.cart.backend.Entity.Analysis;
 import com.cart.backend.Entity.AreaAnalysis;
 import com.cart.backend.Entity.IndustryAnalysis;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,13 +11,13 @@ import java.util.List;
 @Mapper
 public interface AnalysisMapper {
 
-    @Select("SELECT * from areaclaimgrowthstats " +
-            "where Year = #{Year}")
-    public List<AreaAnalysis> getAreaAnalysisByYear(int Year);
+    @Select("select * from areastatics where year = #{year}")
+    public List<AreaAnalysis> getAreaAnalysisByYear(int year);
 
-    @Select("SELECT * from industryclaimgrowthstats " +
-            "where Year = #{Year}")
-    public List<IndustryAnalysis> getIndustryAnalysisByYear(int Year);
+    @Select("select * from industrystatics where year = #{year}")
+    public List<IndustryAnalysis> getIndustryAnalysisByYear(int year);
+
+    @Select("select * from totalclaims")
+    public List<Analysis> getTotalClaims();
 
 }
-

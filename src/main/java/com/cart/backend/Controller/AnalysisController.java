@@ -1,9 +1,6 @@
 package com.cart.backend.Controller;
 
-
 import com.cart.backend.DAO.AnalysisMapper;
-import com.cart.backend.Entity.AreaAnalysis;
-import com.cart.backend.Entity.IndustryAnalysis;
 import com.cart.backend.Entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,28 +8,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class AnalysisController {
 
     @Autowired
-    private AnalysisMapper analysisMapper;
+    AnalysisMapper analysisMapper;
+
 
     @RequestMapping("/api/admin/analysis/industry")
-    public Result getIndustryAnalysis(@RequestBody Integer year)
+    public Result industryAnalysis(@RequestBody int year)
     {
-        List<IndustryAnalysis> res =  analysisMapper.getIndustryAnalysisByYear(year);
-
-        return Result.Success(res);
+        return Result.Success(analysisMapper.getIndustryAnalysisByYear(year));
     }
 
     @RequestMapping("/api/admin/analysis/area")
-    public Result getAreaAnalysis(@RequestBody Integer year)
+    public Result areaAnalysis(@RequestBody int year)
     {
-        List<AreaAnalysis> res =  analysisMapper.getAreaAnalysisByYear(year);
-        return Result.Success(res);
+        return Result.Success(analysisMapper.getAreaAnalysisByYear(year));
+    }
+
+    @RequestMapping("/api/admin/analysis/total")
+    public Result totalAnalysis()
+    {
+        return Result.Success((analysisMapper.getTotalClaims()));
     }
 
 }

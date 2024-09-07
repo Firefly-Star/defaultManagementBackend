@@ -1,10 +1,8 @@
 package com.cart.backend.DAO;
 
 import com.cart.backend.Entity.Auth;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import com.cart.backend.Entity.EditPassword;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface AuthMapper {
@@ -21,5 +19,9 @@ public interface AuthMapper {
     @Select("select * from auth " +
             "where id = #{id}")
     public Auth UserInfo(Integer id);
+
+    @Update("update auth set password = #{newPassword} " +
+            "where id = #{id} and password = #{oldPassword}")
+    public int updateAuth(EditPassword editPassword);
 
 }

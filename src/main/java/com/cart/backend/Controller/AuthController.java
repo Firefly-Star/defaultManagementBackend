@@ -3,6 +3,7 @@ package com.cart.backend.Controller;
 import com.cart.backend.DAO.AuthMapper;
 import com.cart.backend.Entity.Auth;
 import com.cart.backend.Entity.AuthInfo;
+import com.cart.backend.Entity.EditPassword;
 import com.cart.backend.Entity.Result;
 import com.cart.backend.Utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +118,20 @@ public class AuthController {
         authInfo.setEmail(auth.getEmail());
 
         return Result.Success(authInfo);
+    }
+
+    @RequestMapping("/api/auth/user/editPassword")
+    public Result UserEditPassword(@RequestBody EditPassword editPassword)
+    {
+        int result = authMapper.updateAuth(editPassword);
+        if (result == 0)
+        {
+            return Result.Fail("Failed to update password");
+        }
+        else
+        {
+            return Result.Success("Success");
+        }
     }
 
 }

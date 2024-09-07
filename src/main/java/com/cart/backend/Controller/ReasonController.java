@@ -27,6 +27,7 @@ public class ReasonController {
     @RequestMapping("/api/user/reasons")
     public Result userReasonList(@RequestBody Reason reason) {
 
+        reason.setEnable(1);
         List<Reason> re = reasonMapper.SelectReason(reason);
         return Result.Success(re);
     }

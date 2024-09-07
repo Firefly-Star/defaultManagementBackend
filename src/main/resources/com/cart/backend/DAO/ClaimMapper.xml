@@ -5,44 +5,51 @@
 
 <mapper namespace="com.cart.backend.DAO.ClaimMapper">
 
-    <select id="SelectClaim" resultType="com.cart.backend.Entity.Claim">
-        select * from claim
+    <select id="SelectClaim" resultType="com.cart.backend.Entity.ClaimSelectParam">
+        select
+            claim.id, client.name,reviewer.name, claimer.name, claim.reviewStatus,
+            claim.severity, claim.claimTime, claim.reviewTime,
+            claim.externSeverity, claim.type, claim.claimerId,claim.reviewerId
+        from
+        claim inner join client on claim.clientId = client.id
+        inner join auth reviewer on claim.reviewerId = reviewer.id
+        inner join auth claimer on claim.claimerId = claimer.id
         <where>
             <if test="clientName != null">
-                clientId = (
+                claim.clientId = (
                 select id from client
                 where name like concat('%', #{clientName}, '%')
                 )
             </if>
-            <if test="reasonName != null">
-                and reasonId = (
-                select id from reason
-                where cause like concat('%', #{reasonName}, '%')
+            <if test="reviewerName != null">
+                and claim.reviewerId = (
+                select id from auth
+                where name like concat('%', #{reviewerName}, '%')
                 )
             </if>
             <if test="reviewStatus != null">
-                and reviewStatus = #{reviewStatus}
+                and claim.reviewStatus = #{reviewStatus}
             </if>
             <if test="severity != null">
-                and severity = #{severity}
+                and claim.severity = #{severity}
             </if>
             <if test="claimTime != null">
-                and Date(claimTime) = #{claimTime}
+                and date(claim.claimTime) = #{claimTime}
             </if>
             <if test="reviewTime != null">
-                and Date(reviewTime) = #{reviewTime}
+                and date(claim.reviewTime) = #{reviewTime}
             </if>
             <if test="externSeverity != null">
-                and externSeverity = #{externSeverity}
+                and claim.externSeverity = #{externSeverity}
             </if>
             <if test="type != null">
-                and type = #{type}
+                and claim.type = #{type}
             </if>
             <if test="claimerId != null">
-                and claimerId = #{claimerId}
+                and claim.claimerId = #{claimerId}
             </if>
             <if test="reviewerId != null">
-                and reviewerId = #{reviewerId}
+                and claim.reviewerId = #{reviewerId}
             </if>
         </where>
     </select>

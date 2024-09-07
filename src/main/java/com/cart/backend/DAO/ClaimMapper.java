@@ -21,5 +21,5 @@ public interface ClaimMapper {
             "WHERE id=#{id}")
     public void UpdateClaim(Claim claim);
 
-    public List<Claim> SelectClaim(ClaimSelectParam param);
+    public List<ClaimSelectParam> SelectClaim(ClaimSelectParam param);
 }

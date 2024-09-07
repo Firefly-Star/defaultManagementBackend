@@ -60,12 +60,15 @@ public class ClaimController {
     public Result UserSelectClaim(@RequestHeader("userToken") String userToken, @RequestBody ClaimSelectParam param)
     {
 
+
         Map<String, Object> claims = JwtUtils.parseJwt(userToken);
         Integer id = (Integer)claims.get("id");
 
         param.setClaimerId(id);
 
-        List<Claim> res = claimMapper.SelectClaim(param);
+        System.out.println(param);
+
+        List<ClaimSelectParam> res = claimMapper.SelectClaim(param);
         return Result.Success(res);
     }
 
@@ -73,7 +76,7 @@ public class ClaimController {
     public Result UserSelectClaim(@RequestBody ClaimSelectParam param)
     {
 
-        List<Claim> claims = claimMapper.SelectClaim(param);
+        List<ClaimSelectParam> claims = claimMapper.SelectClaim(param);
         return Result.Success(claims);
     }
 

@@ -19,7 +19,6 @@ public class ReasonController {
     @RequestMapping("/api/admin/reasons")
     public Result adminReasonList(@RequestBody Reason reason) {
 
-        System.out.println(reason);
         List<Reason> re = reasonMapper.SelectReason(reason);
 
         return Result.Success(re);
@@ -35,8 +34,6 @@ public class ReasonController {
     @RequestMapping("/api/admin/addReason")
     public Result AddReason(@RequestBody Reason reason) {
 
-        System.out.println("Add reason");
-        System.out.println(reason);
         reasonMapper.InsertReason(reason);
 
         if (reason.getId() != null)
@@ -51,9 +48,6 @@ public class ReasonController {
 
     @RequestMapping("/api/admin/editReason")
     public Result editReason(@RequestBody Reason reason) {
-
-        System.out.println("Edit reason");
-        System.out.println(reason);
 
         reasonMapper.UpdateReason(reason);
         return Result.Success(null);

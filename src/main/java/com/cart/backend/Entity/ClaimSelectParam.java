@@ -12,8 +12,9 @@ import java.sql.Date;
 @NoArgsConstructor
 public class ClaimSelectParam {
 
+    Integer id;
     String clientName;
-    String reasonName;
+    String reviewerName;
     String reviewStatus;
     String severity;
     Date claimTime;

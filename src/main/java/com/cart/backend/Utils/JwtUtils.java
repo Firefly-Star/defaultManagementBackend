@@ -5,21 +5,24 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class JwtUtils {
 
     private static String signKey = "Firefly";
-    private static int expire = 3600000; // 1 hour
+    private static int expire = 3600000;
 
-    public static String GenJwt(Map<String, Object> claims) {
-        String jwt = Jwts.builder()
+    public static void init(String secret, int expiration) {
+        signKey = secret;
+        expire = expiration;
+    }
+
+    public static String genJwt(Map<String, Object> claims) {
+        return Jwts.builder()
                 .addClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, signKey)
-                .setExpiration(new Date(System.currentTimeMillis() + + expire))
+                .setExpiration(new Date(System.currentTimeMillis() + expire))
                 .compact();
-        return jwt;
     }
 
     public static Map<String, Object> parseJwt(String jwt) {
@@ -29,5 +32,4 @@ public class JwtUtils {
                 .getBody();
         return claim;
     }
-
 }

@@ -8,12 +8,10 @@ import com.cart.backend.Entity.Result;
 import com.cart.backend.Utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8081/user"})
 @RestController
 public class AuthController {
 
@@ -50,7 +48,7 @@ public class AuthController {
             claims.put("id", returnAuth.getId());
             claims.put("username", returnAuth.getUsername());
             claims.put("role", returnAuth.getRole());
-            return Result.Success(JwtUtils.GenJwt(claims));
+            return Result.Success(JwtUtils.genJwt(claims));
         }
     }
 
@@ -84,7 +82,7 @@ public class AuthController {
             claims.put("id", returnAuth.getId());
             claims.put("username", returnAuth.getUsername());
             claims.put("role", returnAuth.getRole());
-            return Result.Success(JwtUtils.GenJwt(claims));
+            return Result.Success(JwtUtils.genJwt(claims));
         }
     }
 

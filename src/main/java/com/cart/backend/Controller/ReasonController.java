@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8081/user"})
 public class ReasonController {
 
     @Autowired
